@@ -1,21 +1,22 @@
 # Christian Motivator – Electron Desktop App
 
-This repository is CI-ready to build a **Windows .exe installer** via **GitHub Actions** —
-so you don't need Node.js on your PC.
+This is a desktop build of the Christian Motivator (Electron + Vite + Tailwind).
 
-## One‑time setup (no terminal on your PC)
-1. Create a new empty GitHub repo.
-2. Upload all files from this folder (or drag & drop in GitHub web UI).
-3. Go to **Actions** tab → enable workflows if prompted.
-4. Trigger a run: **Actions → Build Windows Installer → Run workflow**.
-5. After ~3–6 minutes, download the artifact **Christian-Motivator-Installer** → it contains `Christian-Motivator-Setup-<version>.exe`.
-6. Double‑click the `.exe` to install. Done.
-
-The workflow file is at `.github/workflows/build.yml`.
-
-## Local dev (optional)
-If you *do* have Node and want to run locally:
+## Dev run
 ```bash
 npm install
 npm run dev
 ```
+- This runs Vite on http://localhost:5173 and launches Electron to that URL.
+
+## Build Windows Installer (.exe)
+```bash
+npm run dist
+```
+- Produces an NSIS installer under `release/` (e.g., `Christian-Motivator-Setup-x.x.x.exe`).
+- No code signing is required for local use. Windows SmartScreen may warn; choose "More info" → "Run anyway".
+
+## Notes
+- App bundles the compiled Vite `dist/` and loads it in Electron.
+- If you want a custom icon, replace `build/icon.ico` before running `npm run dist`.
+- All data is stored locally (LocalStorage). No accounts or servers required.
